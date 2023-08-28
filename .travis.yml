@@ -1,0 +1,16 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - echo "START CREATEING AN IMAGE WITH DOCKERFILE"
+  - docker build -t juy4556/docker-react-app -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true juy4556/docker-react-app npm run test -- --converage
+
+after_success:
+  - echo "TEST SUCCESS"  
